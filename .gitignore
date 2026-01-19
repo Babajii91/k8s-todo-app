@@ -1,0 +1,38 @@
+# --- Node.js ---
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# --- Backend ---
+backend/node_modules/
+backend/*.log
+
+# --- Frontend ---
+frontend/node_modules/
+frontend/*.log
+dist/
+build/
+
+# --- Docker ---
+*.pid
+*.seed
+*.pid.lock
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- IDE / éditeurs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Environnements ---
+.env
+.env.local
+.env.*.local
+
+# --- Kubernetes (si tu génères des fichiers temporaires) ---
+*.yaml.tmp
