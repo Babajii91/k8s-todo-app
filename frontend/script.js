@@ -1,21 +1,21 @@
-const API_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3000"
-    : "http://host.docker.internal:3000";
-
+const API_URL = "http://backend-service:3000";
 
 async function loadTasks() {
-  const res = await fetch(`${API_URL}/tasks`);
-  const tasks = await res.json();
+  try {
+    const res = await fetch(`${API_URL}/tasks`);
+    const tasks = await res.json();
 
-  const list = document.getElementById("taskList");
-  list.innerHTML = "";
+    const list = document.getElementById("taskList");
+    list.innerHTML = "";
 
-  tasks.forEach(t => {
-    const li = document.createElement("li");
-    li.textContent = t.name;
-    list.appendChild(li);
-  });
+    tasks.forEach(t => {
+      const li = document.createElement("li");
+      li.textContent = t.name;
+      list.appendChild(li);
+    });
+  } catch (err) {
+    console.error("Erreur lors du chargement des tâches :", err);
+  }
 }
 
 async function addTask() {
@@ -24,14 +24,18 @@ async function addTask() {
 
   if (!name) return;
 
-  await fetch(`${API_URL}/tasks`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name })
-  });
+  try {
+    await fetch(`${API_URL}/tasks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name })
+    });
 
-  input.value = "";
-  loadTasks();
+    input.value = "";
+    loadTasks();
+  } catch (err) {
+    console.error("Erreur lors de l'ajout :", err);
+  }
 }
 
 loadTasks();
