@@ -83,3 +83,50 @@ Elle fonctionne en deux parties :
 
 ![affichage du projet](images/locale2.png)
 
+## Utilisation de Minikube
+
+- Lancement du cluster Minikube.
+
+```bash
+minikube start --driver=docker
+```
+![Minikube](images/minikube_start.png)
+
+
+- configuré Docker pour que Minikube utilise les images locales.
+
+
+![Minikube](images/minikube.png)
+
+
+```bash
+kubectl apply -f k8s/
+```
+
+![Minikube](images/k8.png)
+
+
+
+- Kubernetes a alors créé les pods et les services pour le frontend et le backend.
+
+
+```bash
+kubectl get pods
+kubectl get svc
+```
+
+![Minikube](images/minikube2.png)
+
+
+- Le backend est exposé en ClusterIP, donc il n’est accessible que depuis le cluster.
+
+- Le frontend est en NodePort, donc Minikube peut me donner une URL pour y accéder.
+
+```bash
+minikube service frontend-service --url
+```
+
+![Minikube](images/minikube3.png)
+
+
+![Minikube](images/mini-to-do-app.png)
